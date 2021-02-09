@@ -21,6 +21,9 @@ class Dao {
         }
     }
 
+    /**
+     * singleton
+     */
     public static function getInstance(){
         if(is_null(self::$INSTANCEDAO)){
             self::$INSTANCEDAO = new Dao();
