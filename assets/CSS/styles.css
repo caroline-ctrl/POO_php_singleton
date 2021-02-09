@@ -1,0 +1,21 @@
+body{
+    background-color: #ffffff;
+    background-image: url("https://www.transparenttextures.com/patterns/back-pattern.png");
+    
+
+}
+
+#bandeau_haut{
+  background-image: url('../images/watercolor.png');
+   background-repeat: repeat;
+   background-position: center;
+   height: 300px;
+   border-bottom: 5px solid #db629a;
+
+}
+
+#titre_accueil{
+    font-family: 'Fredericka the Great', cursive;
+    text-align: center;
+
+}
