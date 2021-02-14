@@ -1,5 +1,5 @@
 <?php
-include('models/interfaces/Crud.php');
+include(__DIR__ . '\..\models\interfaces\Crud.php');
 /**
  * Connexion à la base de données
  */
@@ -41,7 +41,7 @@ class Dao implements Crud {
 
 
     /**********************METHODES INTERFACE****************/
-    public function create(){
+    public function createUser($data){
 
     }
 

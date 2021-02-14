@@ -1,6 +1,5 @@
 <?php
-include('DAO/Dao.php');
-//include('models/interfaces/Crud.php');
+include(__DIR__ . '\..\DAO\Dao.php');
 
 class UserController implements Crud {
 
@@ -13,11 +12,20 @@ class UserController implements Crud {
     }
 
     /**********************METHODES INTERFACE****************/
-    public function create(){
+    public function createUser($data){
         $this->connectDB();
-        if (isset($_POST['fistname'])){
-            echo $_POST['fistname'];
-            header('Location : http://poo-php/');
+        if (isset($data)){
+            $hash = password_hash($data['password'], PASSWORD_DEFAULT);
+            if (password_verify($data['passwordVerif'], $hash)){
+                $datas = array(
+                    strtolower($data['firstName']),
+                    strtolower($data['lastName']),
+                    strtolower($data['pseudo']),
+                    strtolower($data['mail']),
+                    strtolower($data['password'])
+                );
+                return $datas;
+            }
         }
     }
 

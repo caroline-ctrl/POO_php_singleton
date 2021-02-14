@@ -1,21 +1,20 @@
 <?php
-$title = "HappyGrossesse | Accueil";
+$title = "Happy | Accueil";
 include('Controllers/UserController.php');
 include('templates/header.php');
 
-$controller = new UserController();
 
 ?>
 
 <div id="bandeau_haut">
-    <h1 id="titre_accueil">Bienvenue sur HappyGrossesse</h1>
+    <h1 id="titre_accueil">Bienvenue sur Happy</h1>
 </div>
 
 <div class="container">
 
 <h1>Creation d'un user</h1>
 
-<form action="UserController.php" method="POST" class="mt-5">
+<form action="#" method="POST" class="mt-5" id="monForm">
   <div class="form-group">
     <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Prénom">
   </div>
@@ -32,15 +31,25 @@ $controller = new UserController();
     <input type="password" class="form-control" id="password" name="password" placeholder="Password">
   </div>
 
-  <button type="submit" class="btn btn-primary mb-5">Envoyer</button>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <!--<input type="button" class="btn btn-primary mb-5" id="monBouton" value="envoyer">-->
 </form>
 
-<p><?= $controller->create(); ?></p>
-<p><?= isset($_POST['firstName']) ? $_POST['firstName'] : "" ; ?></p>
-
-
-<h1>Tous les users</h1>
 
 <?php
+$controller = new UserController();
+$data = $_POST;
+$result = $controller->createUser($data);
+
+if (isset($_POST)){
+  echo "<p>Prénom : " . $result[0] . "</p>";
+  echo "<p>Nom : " . $result[1] . "</p>";
+  echo "<p>Pseudo : " . $result[2] . "</p>";
+  echo "<p>Mail : " . $result[2] . "</p>";
+  echo "<p>Mot de passe : " . $result[4] . "</p>";
+}
+
 
 include('templates/footer.php');
+
+// ajouter passwordVerif dans le formulaire
