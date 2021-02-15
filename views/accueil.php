@@ -2,7 +2,9 @@
 $title = "Happy | Accueil";
 include('Controllers/UserController.php');
 include('templates/header.php');
-
+$controller = new UserController();
+$data = $_POST;
+$result = $controller->createUser($data);
 
 ?>
 
@@ -14,7 +16,7 @@ include('templates/header.php');
 
 <h1>Creation d'un user</h1>
 
-<form action="#" method="POST" class="mt-5" id="monForm">
+<form method="POST" class="mt-5" id="monForm">
   <div class="form-group">
     <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Prénom">
   </div>
@@ -28,8 +30,22 @@ include('templates/header.php');
     <input type="email" class="form-control" id="mail" name="mail" placeholder="Mail">
   </div>
   <div class="form-group">
-    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+    <input type="password" class="form-control" id="passwordA" name="passwordA" placeholder="Mot de passe">
   </div>
+  <div class="form-group">
+    <input type="password" class="form-control" id="passwordVerif" name="passwordVerif" placeholder="Vérification mot de passe">
+  </div>
+  <?php
+  if(!empty($_POST)){
+    if($_POST['passwordVerif'] != $_POST['passwordA']){
+  ?>    
+    <div class="alert alert-danger" role="alert">
+      Les deux mot de passe ne sont pas identiques
+    </div>
+  <?php
+  }
+}
+  ?>
 
   <button type="submit" class="btn btn-primary">Submit</button>
   <!--<input type="button" class="btn btn-primary mb-5" id="monBouton" value="envoyer">-->
@@ -37,11 +53,7 @@ include('templates/header.php');
 
 
 <?php
-$controller = new UserController();
-$data = $_POST;
-$result = $controller->createUser($data);
-
-if (isset($_POST)){
+if (!empty($_POST)){
   echo "<p>Prénom : " . $result[0] . "</p>";
   echo "<p>Nom : " . $result[1] . "</p>";
   echo "<p>Pseudo : " . $result[2] . "</p>";

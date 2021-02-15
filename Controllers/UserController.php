@@ -13,16 +13,27 @@ class UserController implements Crud {
 
     /**********************METHODES INTERFACE****************/
     public function createUser($data){
-        $this->connectDB();
-        if (isset($data)){
-            $hash = password_hash($data['password'], PASSWORD_DEFAULT);
+        //$this->connectDB();
+        $dao = Dao::getInstance();
+        if (!empty($data)){
+            $hash = password_hash($data['passwordA'], PASSWORD_DEFAULT);
             if (password_verify($data['passwordVerif'], $hash)){
                 $datas = array(
                     strtolower($data['firstName']),
                     strtolower($data['lastName']),
                     strtolower($data['pseudo']),
                     strtolower($data['mail']),
-                    strtolower($data['password'])
+                    $hash
+                );
+                $dao->createUser($datas);
+                return $datas;
+            } else {
+                $datas = array(
+                    "null",
+                    "null",
+                    "null",
+                    "null",
+                    "null"
                 );
                 return $datas;
             }
